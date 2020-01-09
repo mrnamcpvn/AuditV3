@@ -1,0 +1,56 @@
+<div class="animated fadeIn">
+  <!--/.row-->
+  <div class="row">
+    <!--/.col-->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> List Kinds
+          <button type="button" class="btn btn-sm btn-primary float-right" (click)="addCategory()"><i
+              class="fa fa-plus"></i> Add new</button>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Definition</th>
+                <th>Active</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let category of categories;let i = index">
+              <tr>
+                <td>{{ (pagination.currentPage - 1) * pagination.itemsPerPage + i + 1 }}</td>
+                <td>{{category.name}}</td>
+                <td>{{category.kindName}}</td>
+                <td>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" [id]="category.id" [(ngModel)]="category.active"
+                      (change)="changeStatus(category.id)">
+                    <label class="custom-control-label" [for]="category.id"></label>
+                  </div>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm mr-2" (click)="changeToEdit(category)"><i
+                      class="fa fa-edit fa-lg"></i></button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="deleteKind(category)"><i
+                      class="fa fa-trash fa-lg"></i></button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <div class="d-flex">
+            <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
+              [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+              nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]=5>
+            </pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

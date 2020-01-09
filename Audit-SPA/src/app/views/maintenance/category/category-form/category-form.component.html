@@ -1,0 +1,41 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <strong *ngIf="!category.id;else elseBlock">Add new</strong>
+          <ng-template #elseBlock><strong>Update</strong></ng-template>
+          Category
+          <button type="button" class="btn btn-sm btn-primary float-right" (click)="backList()"><i
+              class="fa fa-chevron-left"></i>
+            Back</button>
+        </div>
+        <form class="form-horizontal" #addCategoryForm="ngForm" (ngSubmit)="addCategoryForm.valid && addCateogry()">
+          <div class="card-body">
+
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="hf-email">Category name: </label>
+              <div class="col-md-9">
+                <input type="text" [(ngModel)]="category.name" name="name" class="form-control"
+                  placeholder="Enter Kind name.." required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="hf-password">Kind Name</label>
+              <div class="col-md-9">
+                <ng-select [items]="kinds" bindLabel="name" placeholder="Select Kind" name="kidnId" bindValue="id"
+                  [(ngModel)]="category.kindId" required></ng-select>
+              </div>
+            </div>
+
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="!addCategoryForm.valid"><i
+                class="fa fa-dot-circle-o"></i> Submit</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
